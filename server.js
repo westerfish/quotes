@@ -1,5 +1,6 @@
 var bodyParser = require('body-parser');
-const quoteroute = require("./routes/quotes");
+const quoteroute = require("./routes/quotes"); 
+var path = require('path');
 
 var express = require('express');
 
@@ -8,9 +9,10 @@ var port = 3000;
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(express.static(__dirname + '/'));
 
  app.get(`/`, function(request, response){
-    response.send("Get request received at '/'");
+    response.sendFile(path.join(__dirname, '/', 'index.html'));
 });
 
 app.use("/api", quoteroute);
